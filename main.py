@@ -1,6 +1,7 @@
 from telebot import types
 import telebot
 import time
+import branches.mainbranch
 #from pydub import AudioSegment
 #import speech_recognition as sr
 
@@ -30,10 +31,19 @@ def setMarkup(opt):  # opt é uma lista de strings com as opções
 def send_welcome(msg):
     # bot.reply_to(msg, "Clique no botão para iniciar seu processo de subscrição.")
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    itembtn = types.KeyboardButton("Iniciar")
-    bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
-                     reply_markup=markup.row(itembtn))
-
+    userID = msg.from_user.id #ID do usuario
+    #print(userID==881538100) 
+    listIDs = [881538100]
+    if userID in listIDs:
+        itembtn = types.KeyboardButton("Iniciar")
+        bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
+                        reply_markup=markup.row(itembtn))
+    else:
+        itembtn = types.KeyboardButton("Ainda não tenho uma conta")
+        itembtn2 = types.KeyboardButton("Já tenho uma conta")
+        bot.send_message(msg.chat.id, """Vejo que é a sua primeira vez conversando comigo, você já é um cliente Americanas cadastrado?.\n
+                                            Caso não seja, não se preocupe! Você está a poucos cliques de poder participar do Ame +""",
+                        reply_markup=markup.row([itembtn, itembtn2]))
 
 @bot.message_handler(func=lambda msg: (msg.text == "Iniciar"))
 def intro(msg):
@@ -55,13 +65,13 @@ def branchHandler1(msg):
 
 def getInfo(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
-                               reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios", "Cashback acumulado", "Meus cupons"]))
+                            reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios", "Cashback acumulado", "Meus cupons"]))
     bot.register_next_step_handler(message, branchHandler2)
 
-
+#@bot.message_handler(commands=['help'])
 def issueHandler(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
-                               reply_markup=setMarkup(["Resumo de funcionalidades", "Alteração de cadastro"]))
+                            reply_markup=setMarkup(["Resumo de funcionalidades", "Alteração de cadastro"]))
     bot.register_next_step_handler(message, branchHandler2)
 
 def branchHandler2(msg):
@@ -79,34 +89,32 @@ def branchHandler2(msg):
     
         
 def resumo(msg):
-    print("funcionou")
-    # msg = bot.send_message(msg.chat.id,
-    #                            "Resumo")
+    msg = bot.send_message(msg.chat.id,
+                            "Resumo")
 
 def altera_cadastro(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Cadastro")
+                            "Cadastro")
 
 def saldo(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Saldo")
+                            "Saldo")
 
 def beneficios(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Beneficios")
+                            "Beneficios")
 
 def desafios(msg):
     msg = bot.send_message(msg.chat.id,
-                               "desafios")
+                            "desafios")
 
 def cashback(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Cashback")
+                            "Cashback")
 
 def cupons(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Cupons")
-
+                            "Cupons")
 
 def fim(msg):
     message = bot.send_message(msg.chat.id,
