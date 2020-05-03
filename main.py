@@ -57,13 +57,13 @@ def branchHandler1(msg):
 def getInfo(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
                                reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios", "Cashback acumulado", "Meus cupons"]))
-    bot.register_next_step_handler(message, branchHandler2(msg))
+    bot.register_next_step_handler(message, branchHandler2)
 
 
 def issueHandler(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
                                reply_markup=setMarkup(["Resumo de funcionalidades", "Alteração de cadastro"]))
-    bot.register_next_step_handler(message, branchHandler2(msg))
+    bot.register_next_step_handler(message, branchHandler2)
 
 def branchHandler2(msg):
     msgDict = {"Resumo de funcionalidades": "resumo(msg)",
@@ -74,6 +74,7 @@ def branchHandler2(msg):
             "Cashback acumulado" : "cashback(msg)",
             "Meus cupons" : "cupons(msg)"
             }
+    
     try:
         eval(msgDict[msg])
     except Exception as e:
