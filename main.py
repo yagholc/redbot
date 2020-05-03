@@ -59,8 +59,8 @@ def IDlink(msg):
 def createAcc(msg):
     itembtn = types.KeyboardButton("Pronto")
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    bot.send_message(msg.chat.id, r"Clique [Aqui](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F) para se cadastrar.", 
-                    parse_mode='MarkdownV2', reply_markup=markup.row(itembtn))
+    bot.send_message(msg.chat.id, r"[Aqui](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)", parse_mode='MarkdownV2')
+                    #parse_mode='MarkdownV2', reply_markup=markup.row(itembtn))
     bot.register_next_step_handler(msg, IDlink)
     # bot.send_message(msg.chat.id, r"""Entendi, clicando neste link você poderá acessar a página de cadastro e assim poderá aproveitar as promoções do Ame +. 
     #         \n [Cadastro](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)""", parse_mode='MarkdownV2')
