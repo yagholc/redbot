@@ -17,7 +17,6 @@ def setMarkup(opt):  # opt é uma lista de strings com as opções
     if isinstance(opt, list):
         itembtn = []
         for i in range(len(opt)):
-            print(i)
             itembtn.append(types.KeyboardButton(opt[i]))
             #eval(f"itembtn{i} = types.KeyboardButton(opt[{i}])")
             cmd = cmd + f"itembtn[{i}], "
@@ -75,10 +74,8 @@ def branchHandler2(msg):
             "Meus cupons" : "cupons(msg)"
             }
     
-    try:
-        eval(msgDict[msg])
-    except Exception as e:
-        print(e)
+    eval(msgDict[msg.text])
+    
     
         
 def resumo(msg):
