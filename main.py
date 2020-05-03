@@ -1,7 +1,6 @@
 from telebot import types
 import telebot
 import time
-import branches.mainbranch
 #from pydub import AudioSegment
 #import speech_recognition as sr
 
@@ -27,23 +26,46 @@ def setMarkup(opt):  # opt é uma lista de strings com as opções
         return (markup.row(itembtnY))
 
 
+
 @bot.message_handler(commands=["start"])
 def send_welcome(msg):
     # bot.reply_to(msg, "Clique no botão para iniciar seu processo de subscrição.")
-    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+    # markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     userID = msg.from_user.id #ID do usuario
     #print(userID==881538100) 
     listIDs = [881538100]
-    if userID in listIDs:
-        itembtn = types.KeyboardButton("Iniciar")
-        bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
-                        reply_markup=markup.row(itembtn))
+    if userID not in listIDs:
+        #itembtn = types.KeyboardButton("Iniciar")
+        # bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
+        #                 reply_markup=markup.row(itembtn))
+        intro(msg)
     else:
-        itembtn = types.KeyboardButton("Ainda não tenho uma conta")
-        itembtn2 = types.KeyboardButton("Já tenho uma conta")
-        bot.send_message(msg.chat.id, """Vejo que é a sua primeira vez conversando comigo, você já é um cliente Americanas cadastrado?.\n
-                                            Caso não seja, não se preocupe! Você está a poucos cliques de poder participar do Ame +""",
-                        reply_markup=markup.row([itembtn, itembtn2]))
+        # itembtn = types.KeyboardButton("Ainda não tenho uma conta")
+        # itembtn2 = types.KeyboardButton("Já tenho uma conta")
+        bot.send_message(msg.chat.id, """Vejo que é a sua primeira vez conversando comigo, você já é um cliente Americanas cadastrado?.
+                                        \nCaso não seja, não se preocupe! Você está a poucos cliques de poder participar do Ame +""",
+                        reply_markup=setMarkup(["Já tenho uma conta", "Ainda não tenho uma conta"]))
+                        #reply_markup=markup.row([itembtn, itembtn2]))
+                        
+                    
+
+@bot.message_handler(func=lambda msg: (msg.text == "Já tenho uma conta"))
+def IDlink(msg):
+    bot.send_message(msg.chat.id, """Ótimo! Só vou precisar do código gerado pelo seu app. 
+            \n OBS: Nesta versão trabalhamos com usuário pre-criados, digite um númeor de 0 a 9 para relaciona-lo ao seu número.""")
+    bot.register_next_step_handler(msg, intro2)
+
+@bot.message_handler(func=lambda msg: (msg.text == "Ainda não tenho uma conta"))
+def createAcc(msg):
+    itembtn = types.KeyboardButton("Pronto")
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+    bot.send_message(msg.chat.id, r"Clique [Aqui](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F) para se cadastrar.", 
+                    parse_mode='MarkdownV2', reply_markup=markup.row(itembtn))
+    bot.register_next_step_handler(msg, IDlink)
+    # bot.send_message(msg.chat.id, r"""Entendi, clicando neste link você poderá acessar a página de cadastro e assim poderá aproveitar as promoções do Ame +. 
+    #         \n [Cadastro](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)""", parse_mode='MarkdownV2')
+    #https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F
+
 
 @bot.message_handler(func=lambda msg: (msg.text == "Iniciar"))
 def intro(msg):
@@ -54,6 +76,13 @@ def intro(msg):
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
 
+def intro2(msg):
+    # markup = types.ReplyKeyboardRemove(selective=False)
+    # tb.send_message(chat_id, message, reply_markup=markup)
+    # message=bot.send_message(msg.chat.id, "Choose one letter:", reply_markup=markup, one_time_keyboard=True)
+    message = bot.send_message(msg.chat.id, "É ótimo te-l@ conosco, como posso ajudar?",
+                            reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
+    bot.register_next_step_handler(message, branchHandler1)
 
 def branchHandler1(msg):
     if msg.text == "Consultar informações da conta":
@@ -68,7 +97,7 @@ def getInfo(msg):
                             reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios", "Cashback acumulado", "Meus cupons"]))
     bot.register_next_step_handler(message, branchHandler2)
 
-#@bot.message_handler(commands=['help'])
+@bot.message_handler(commands=['help'])
 def issueHandler(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
                             reply_markup=setMarkup(["Resumo de funcionalidades", "Alteração de cadastro"]))
@@ -121,7 +150,7 @@ def fim(msg):
                                "Atendimento finalizado lalalala")
 
 
-# @bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.reply_to(message, "Por favor, selecione uma das alternativas exibidas")
 
