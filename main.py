@@ -1,13 +1,15 @@
 from telebot import types
 import telebot
 import time
+import yaml
+
 #from pydub import AudioSegment
 #import speech_recognition as sr
+with open(r"c\config.yml", "r") as ymlfile:
+             cfg = yaml.load(ymlfile)
 
-token = "733315422:AAH8LFFOYXe0saMXY4Z7txYKF3Qu7IOlvu4" #HAL
-#token = "705662565:AAFft7WvsCJDp8Kim0irVAFhMQERXN6nAqE"  # VIUW
 
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(cfg["token"]["hal"])
 respostas = list()
 
 
