@@ -2,7 +2,7 @@ from telebot import types
 import telebot
 import time
 import yaml
-
+import updateJason
 #from pydub import AudioSegment
 #import speech_recognition as sr
 with open(r"c\config.yml", "r") as ymlfile:
@@ -11,7 +11,7 @@ with open(r"c\config.yml", "r") as ymlfile:
 
 bot = telebot.TeleBot(cfg["token"]["red"])
 respostas = list()
-
+userID = 0
 
 def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as opções
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
@@ -34,7 +34,8 @@ def send_welcome(msg):
     # bot.reply_to(msg, "Clique no botão para iniciar seu processo de subscrição.")
     # markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     userID = msg.from_user.id #ID do usuario
-    #print(userID==881538100) 
+    #print(userID==881538100)
+    
     listIDs = [881538100]
     if userID not in listIDs:
         #itembtn = types.KeyboardButton("Iniciar")
@@ -74,6 +75,8 @@ def createAcc(msg):
     #https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F
 
 
+
+
 @bot.message_handler(func=lambda msg: (msg.text == "Iniciar"))
 def intro(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
@@ -87,6 +90,8 @@ def intro2(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
     # tb.send_message(chat_id, message, reply_markup=markup)
     # message=bot.send_message(msg.chat.id, "Choose one letter:", reply_markup=markup, one_time_keyboard=True)
+    
+    updateJason.setAccount(userID,msg)
     message = bot.send_message(msg.chat.id, "É ótimo te-l@ conosco, como posso ajudar?",
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
@@ -136,14 +141,20 @@ def altera_cadastro(msg):
                             "Cadastro")
 
 def saldo(msg):
+    print(updateJason.consultData(userID,"nivel"))
+    data = updateJason.consultData(userID,"nivel")
     msg = bot.send_message(msg.chat.id,
                             "Saldo")
 
 def beneficios(msg):
+    print(updateJason.consultData(userID,"beneficios"))
+    data = updateJason.consultData(userID,"beneficios")
     msg = bot.send_message(msg.chat.id,
                             "Beneficios")
 
 def desafios(msg):
+    print(updateJason.consultData(userID,"desafios"))
+    data = updateJason.consultData(userID,"desafios")
     msg = bot.send_message(msg.chat.id,
                             "desafios")
 
