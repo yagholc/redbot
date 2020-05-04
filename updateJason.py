@@ -39,10 +39,10 @@ def getBenefits():
 def setAccount(id, index):
     contas = getJson("people.json")
     i = 0
+    index = int(index)
     for conta in contas["Accounts"]:
         if(i==index):
             conta["id"] = id
-            print(conta)
         i += 1
     filename = 'people.json'
     with open(filename, 'w') as f:
@@ -52,8 +52,8 @@ def main():
     #getChallenges()
     #getBenefits()
     dataToBeAdded = transformDataToJsonObject(123,1,[],[])
-    setAccount(123,0)
-    print(consultData(123, "beneficios"))
+    setAccount(1123,1)
+    #print(consultData(123, "beneficios"))
 
     
 if __name__ == "__main__":

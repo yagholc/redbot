@@ -37,7 +37,7 @@ def send_welcome(msg):
     #print(userID==881538100)
     
     listIDs = [881538100]
-    if userID not in listIDs:
+    if userID in listIDs:
         #itembtn = types.KeyboardButton("Iniciar")
         # bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
         #                 reply_markup=markup.row(itembtn))
@@ -90,8 +90,8 @@ def intro2(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
     # tb.send_message(chat_id, message, reply_markup=markup)
     # message=bot.send_message(msg.chat.id, "Choose one letter:", reply_markup=markup, one_time_keyboard=True)
-    
-    updateJason.setAccount(userID,msg)
+    userID = msg.from_user.id 
+    updateJason.setAccount(userID,msg.text)
     message = bot.send_message(msg.chat.id, "É ótimo te-l@ conosco, como posso ajudar?",
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
@@ -141,20 +141,25 @@ def altera_cadastro(msg):
                             "Cadastro")
 
 def saldo(msg):
-    print(updateJason.consultData(userID,"nivel"))
-    data = updateJason.consultData(userID,"nivel")
+    print(updateJason.consultData(msg.from_user.id,"nivel"))
+    data = updateJason.consultData(msg.from_user.id,"nivel")
+    bot.send_message(msg.chat.id, data)
     msg = bot.send_message(msg.chat.id,
                             "Saldo")
 
 def beneficios(msg):
-    print(updateJason.consultData(userID,"beneficios"))
-    data = updateJason.consultData(userID,"beneficios")
+    print(updateJason.consultData(msg.from_user.id,"beneficios"))
+    data = updateJason.consultData(msg.from_user.id,"beneficios")
+    for dado in data:
+        bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
                             "Beneficios")
 
 def desafios(msg):
-    print(updateJason.consultData(userID,"desafios"))
-    data = updateJason.consultData(userID,"desafios")
+    print(updateJason.consultData(msg.from_user.id,"desafios"))
+    data = updateJason.consultData(msg.from_user.id,"desafios")
+    for dado in data:
+        bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
                             "desafios")
 
