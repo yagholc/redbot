@@ -1,61 +1,56 @@
 {
     "Accounts": [
         {
-            "id": 1267807582,
+            "id": -1,
             "nivel": 1,
             "beneficios": [],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
-                "Desafio Convide seus Amigos","Desafio Presente para a sua Mãe"
+                "Desafio Convide seus Amigos",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
             ]
         },
         {
             "id": 1123,
             "nivel": 0,
             "beneficios": [],
-            "desafios": ["Desafio Convide seus Amigos"]
+            "desafios": [
+                "Desafio Convide seus Amigos"
+            ]
         },
         {
-            "id": -1,
+            "id": 1267807582,
             "nivel": 0,
             "beneficios": [],
-            "desafios": ["Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME","Desafio Presente para a sua Mãe"]
+            "desafios": [
+                "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
+            ]
         },
         {
             "id": -1,
             "nivel": 1,
             "beneficios": [],
-            "desafios": ["Desafio Convide seus Amigos"]
+            "desafios": [
+                "Desafio Convide seus Amigos"
+            ]
         },
         {
             "id": -1,
             "nivel": 1,
             "beneficios": [],
-            "desafios": ["Desafio Compre Barra de Chocolate na loja e Receba hoje"]
+            "desafios": [
+                "Desafio Compre Barra de Chocolate na loja e Receba hoje"
+            ]
         },
         {
             "id": -1,
             "nivel": 1,
             "beneficios": [],
-            "desafios": ["Desafio Convide seus Amigos", "Desafio Presente para a sua Mãe"]
-        },
-        {
-            "id": -1,
-            "nivel": 1,
-            "beneficios": [],
-            "desafios": ["Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME","Desafio Presente para a sua Mãe"]
-        },
-        {
-            "id": -1,
-            "nivel": 1,
-            "beneficios": [],
-            "desafios": ["Desafio Compre Barra de Chocolate na loja e Receba hoje","Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME","Desafio Presente para a sua Mãe"]
-        },
-        {
-            "id": -1,
-            "nivel": 1,
-            "beneficios": [],
-            "desafios": ["Desafio Convide seus Amigos","Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME","Desafio Presente para a sua Mãe"]
+            "desafios": [
+                "Desafio Convide seus Amigos",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
+            ]
         },
         {
             "id": -1,
@@ -63,7 +58,37 @@
             "beneficios": [],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
-                "Desafio Convide seus Amigos","Desafio Presente para a sua Mãe"
+                "Desafio Presente para a sua M\u00c3\u00a3e"
+            ]
+        },
+        {
+            "id": -1,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": [
+                "Desafio Compre Barra de Chocolate na loja e Receba hoje",
+                "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
+            ]
+        },
+        {
+            "id": -1,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": [
+                "Desafio Convide seus Amigos",
+                "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
+            ]
+        },
+        {
+            "id": -1,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": [
+                "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
+                "Desafio Convide seus Amigos",
+                "Desafio Presente para a sua M\u00c3\u00a3e"
             ]
         }
     ]
