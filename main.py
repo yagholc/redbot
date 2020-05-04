@@ -11,7 +11,6 @@ with open(r"c\config.yml", "r") as ymlfile:
 
 bot = telebot.TeleBot(cfg["token"]["red"])
 respostas = list()
-userID = 0
 
 def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as opções
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
@@ -43,9 +42,7 @@ def send_welcome(msg):
     # bot.reply_to(msg, "Clique no botão para iniciar seu processo de subscrição.")
     # markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     userID = msg.from_user.id #ID do usuario
-    #print(userID==881538100)
-    print(updateJason.getAllIds())
-    listIDs = [881538100]
+    listIDs = updateJason.getAllIds()
     if userID in listIDs:
         #itembtn = types.KeyboardButton("Iniciar")
         # bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",

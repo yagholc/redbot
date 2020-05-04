@@ -5,12 +5,14 @@ def getJson(filename):
     with open(filename, "r") as read_file:
         data = json.load(read_file)
         return data
+
 def getAllIds():
     contas = getJson("people.json")
     listIDs = []
     for conta in contas["Accounts"]:
         listIDs.append(conta["id"])
     return listIDs
+
 #Insere novo valor,
 def insertValue(dataToBeAdded):
     filename = 'people.json'
