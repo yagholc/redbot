@@ -21,7 +21,7 @@ def insertValue(dataToBeAdded):
 def consultData(username, data):
     contas = getJson("people.json")
     for conta in contas["Accounts"]:
-        if(conta['ContaAme'] == username):
+        if(conta['id'] == username):
             return conta[data]
 
 def transformDataToJsonObject(idAccount, nivel, beneficios, desafios):
@@ -41,6 +41,6 @@ def main():
     getBenefits()
     dataToBeAdded = transformDataToJsonObject(123,1,[],[])
     #insertValue(dataToBeAdded)
-    print(consultData("Calvin", "Nivel"))
+    print(consultData(123, "beneficios"))
 if __name__ == "__main__":
     main()

@@ -1,16 +1,16 @@
 {
     "Accounts": [
         {
-            "ContaAme": "Tainha",
-            "Nivel": "1"
+            "id": "Tainha",
+            "nivel": "1"
         },
         {
-            "ContaAme": "BrunoLeaoT",
-            "Nivel": "0"
+            "id": "BrunoLeaoT",
+            "nivel": "0"
         },
         {
-            "ContaAme": "Calvin",
-            "Nivel": "2"
+            "id": "Calvin",
+            "nivel": "2"
         },
         {
             "id": 123,
