@@ -17,12 +17,21 @@ def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as op�
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
     cmd = ''
     if isinstance(opt, list):
-        itembtn = []
-        for i in range(len(opt)):
-            itembtn.append(types.KeyboardButton(opt[i]))
-            #eval(f"itembtn{i} = types.KeyboardButton(opt[{i}])")
-            cmd = cmd + f"itembtn[{i}], "
-        return (eval('markup.row(' + cmd[0:-2] + ')'))
+        if len(opt)==4:
+            btn1 = types.KeyboardButton(opt[0])
+            btn2 = types.KeyboardButton(opt[1])
+            btn3 = types.KeyboardButton(opt[2])
+            btn4 = types.KeyboardButton(opt[3])
+            markup.add(btn1, btn2)
+            markup.add(btn3, btn4)
+            return(markup)
+        else:
+            itembtn = []
+            for i in range(len(opt)):
+                itembtn.append(types.KeyboardButton(opt[i]))
+                #eval(f"itembtn{i} = types.KeyboardButton(opt[{i}])")
+                cmd = cmd + f"itembtn[{i}], "
+            return (eval('markup.row(' + cmd[0:-2] + ')'))
     else:
         itembtnY = types.KeyboardButton(opt)
         return (markup.row(itembtnY))
@@ -74,9 +83,7 @@ def createAcc(msg):
     #         \n [Cadastro](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)""", parse_mode='MarkdownV2')
     #https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F
 
-
-
-
+#Intro padrão
 @bot.message_handler(func=lambda msg: (msg.text == "Iniciar"))
 def intro(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
@@ -86,6 +93,7 @@ def intro(msg):
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
 
+#intro para quem acabou de se cadastrar
 def intro2(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
     # tb.send_message(chat_id, message, reply_markup=markup)
@@ -93,6 +101,12 @@ def intro2(msg):
     userID = msg.from_user.id 
     updateJason.setAccount(userID,msg.text)
     message = bot.send_message(msg.chat.id, "É ótimo te-l@ conosco, como posso ajudar?",
+                            reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
+    bot.register_next_step_handler(message, branchHandler1)
+
+#Intro para quem está voltando do final da arvore do bot
+def intro3(msg):
+    message = bot.send_message(msg.chat.id, "Fico feliz em poder ajuda-lo, mas se precisar é só chamar!",
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
 
@@ -112,7 +126,7 @@ def getInfo(msg):
 
     bot.register_next_step_handler(message, branchHandler2)
 
-@bot.message_handler(commands=['help'])
+@bot.message_handler(func=lambda msg: (msg.text.lower == "ajuda"))
 def issueHandler(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
                             reply_markup=setMarkup(["Resumo de funcionalidades", "Alteração de cadastro"]))
@@ -124,9 +138,9 @@ def branchHandler2(msg):
             "Saldo" : "saldo(msg)",
             "Beneficios adquiridos" : "beneficios(msg)",
             "Desafios" : "desafios(msg)",
-           # "Cashback acumulado" : "cashback(msg)",
             "Meus cupons" : "cupons(msg)"
             }
+                       # "Cashback acumulado" : "cashback(msg)",
     
     eval(msgDict[msg.text])
     
@@ -134,18 +148,22 @@ def branchHandler2(msg):
         
 def resumo(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Resumo")
+                            "Resumo", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
+
 
 def altera_cadastro(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Cadastro")
+                            "Cadastro", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
 def saldo(msg):
     print(updateJason.consultData(msg.from_user.id,"nivel"))
     data = updateJason.consultData(msg.from_user.id,"nivel")
     bot.send_message(msg.chat.id, data)
     msg = bot.send_message(msg.chat.id,
-                            "Saldo")
+                            "Saldo", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
 def beneficios(msg):
     print(updateJason.consultData(msg.from_user.id,"beneficios"))
@@ -153,7 +171,8 @@ def beneficios(msg):
     for dado in data:
         bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
-                            "Beneficios")
+                            "Beneficios", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
 def desafios(msg):
     print(updateJason.consultData(msg.from_user.id,"desafios"))
@@ -161,24 +180,28 @@ def desafios(msg):
     for dado in data:
         bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
-                            "desafios")
+                            "desafios", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
 def cashback(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Cashback")
+                            "Cashback", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
 def cupons(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Cupons")
+                            "Cupons", reply_markup=setMarkup(["Voltar começo"]))
+    bot.register_next_step_handler(msg, intro3)
 
+@bot.message_handler(func=lambda msg: (msg.text.lower() == "fim"))
 def fim(msg):
     msg = bot.send_message(msg.chat.id,
-                               "Atendimento finalizado lalalala")
+                               "Atendimento finalizado, caso precise de mais algo basta enviar /start no chat")
 
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(msg):
-    bot.reply_to(message, "Por favor, selecione uma das alternativas exibidas")
+    bot.reply_to(msg, "Por favor, selecione uma das alternativas exibidas")
     intro(msg)
 
 
