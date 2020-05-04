@@ -1,19 +1,37 @@
 {
     "Accounts": [
         {
-            "id": "Tainha",
-            "nivel": "1"
-        },
-        {
-            "id": "BrunoLeaoT",
-            "nivel": "0"
-        },
-        {
-            "id": "Calvin",
-            "nivel": "2"
-        },
-        {
             "id": 123,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": []
+        },
+        {
+            "id": 0,
+            "nivel": 0,
+            "beneficios": [],
+            "desafios": []
+        },
+        {
+            "id": 0,
+            "nivel": 0,
+            "beneficios": [],
+            "desafios": []
+        },
+        {
+            "id": 0,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": []
+        },
+        {
+            "id": 0,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": []
+        },
+        {
+            "id": 0,
             "nivel": 1,
             "beneficios": [],
             "desafios": []
