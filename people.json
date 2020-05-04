@@ -2,8 +2,8 @@
     "Accounts": [
         {
             "id": -1,
-            "nivel": 1,
-            "beneficios": [],
+            "nivel": 2,
+            "beneficios": ["Frete Gratis - a partir de R$80,00","Caschback multiplicado por 2", "1 cupom frete grátis"],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
                 "Desafio Convide seus Amigos",
@@ -12,16 +12,16 @@
         },
         {
             "id": 1123,
-            "nivel": 0,
-            "beneficios": [],
+            "nivel": 1,
+            "beneficios": ["Frete Gratis - a partir de R$80,00"],
             "desafios": [
                 "Desafio Convide seus Amigos"
             ]
         },
         {
             "id": 1267807582,
-            "nivel": 0,
-            "beneficios": [],
+            "nivel": 2,
+            "beneficios": ["1 cupom frete grátis"],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
                 "Desafio Presente para a sua M\u00c3\u00a3e"
@@ -30,7 +30,7 @@
         {
             "id": -1,
             "nivel": 1,
-            "beneficios": [],
+            "beneficios": ["Caschback multiplicado por 2", "1 cupom frete grátis"],
             "desafios": [
                 "Desafio Convide seus Amigos"
             ]
@@ -38,7 +38,7 @@
         {
             "id": 881538100,
             "nivel": 1,
-            "beneficios": [],
+            "beneficios": ["Caschback multiplicado por 2", "1 cupom frete grátis"],
             "desafios": [
                 "Desafio Compre Barra de Chocolate na loja e Receba hoje"
             ]
@@ -46,7 +46,7 @@
         {
             "id": -1,
             "nivel": 1,
-            "beneficios": [],
+            "beneficios": ["1 cupom frete grátis","Frete Gratis - a partir de R$80,00" ],
             "desafios": [
                 "Desafio Convide seus Amigos",
                 "Desafio Presente para a sua M\u00c3\u00a3e"
@@ -54,8 +54,8 @@
         },
         {
             "id": -1,
-            "nivel": 1,
-            "beneficios": [],
+            "nivel": 5,
+            "beneficios": ["Cupom desconto 5%", "1 cupom frete grátis", "Americana Prime+"],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
                 "Desafio Presente para a sua M\u00c3\u00a3e"
@@ -64,7 +64,7 @@
         {
             "id": -1,
             "nivel": 1,
-            "beneficios": [],
+            "beneficios": ["Frete Gratis - a partir de R$80,00"],
             "desafios": [
                 "Desafio Compre Barra de Chocolate na loja e Receba hoje",
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
@@ -74,7 +74,7 @@
         {
             "id": -1,
             "nivel": 1,
-            "beneficios": [],
+            "beneficios": ["Caschback multiplicado por 2"],
             "desafios": [
                 "Desafio Convide seus Amigos",
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
@@ -83,8 +83,8 @@
         },
         {
             "id": -1,
-            "nivel": 1,
-            "beneficios": [],
+            "nivel": 2,
+            "beneficios": ["Frete Gratis - a partir de R$120,00","Caschback multiplicado por 2"],
             "desafios": [
                 "Desafio AME: Fa\u00c3\u00a7a uma Compra com o AME",
                 "Desafio Convide seus Amigos",
