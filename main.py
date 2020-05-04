@@ -9,12 +9,12 @@ with open(r"c\config.yml", "r") as ymlfile:
              cfg = yaml.load(ymlfile)
 
 
-bot = telebot.TeleBot(cfg["token"]["hal"])
+bot = telebot.TeleBot(cfg["token"]["red"])
 respostas = list()
 
 
-def setMarkup(opt):  # opt é uma lista de strings com as opções
-    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=(0.2, 0.5))
+def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as opções
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
     cmd = ''
     if isinstance(opt, list):
         itembtn = []
@@ -48,22 +48,27 @@ def send_welcome(msg):
                                         \nCaso não seja, não se preocupe! Você está a poucos cliques de poder participar do Ame +""",
                         reply_markup=setMarkup(["Já tenho uma conta", "Ainda não tenho uma conta"]))
                         #reply_markup=markup.row([itembtn, itembtn2]))
+        
                         
                     
 
 @bot.message_handler(func=lambda msg: (msg.text == "Já tenho uma conta"))
 def IDlink(msg):
-    bot.send_message(msg.chat.id, """Ótimo! Só vou precisar do código gerado pelo seu app. 
-            \n OBS: Nesta versão trabalhamos com usuário pre-criados, digite um númeor de 0 a 9 para relaciona-lo ao seu número.""")
+    bot.send_message(msg.chat.id, "Ótimo! Só vou precisar do código gerado pelo seu app. ")
+    bot.send_message(msg.chat.id, "OBS: Nesta versão trabalhamos com usuário pre-criados, digite um número de 0 a 9 para relaciona-lo ao seu usuário.")
     bot.register_next_step_handler(msg, intro2)
 
 @bot.message_handler(func=lambda msg: (msg.text == "Ainda não tenho uma conta"))
 def createAcc(msg):
     itembtn = types.KeyboardButton("Pronto")
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    bot.send_message(msg.chat.id, r"[Aqui](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)", parse_mode='MarkdownV2')
+    bot.send_message(msg.chat.id, "Clique no link para se cadastrar na americanas")
+    bot.send_message(msg.chat.id, r"Clique [aqui](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)", parse_mode='MarkdownV2')
+    bot.send_message(msg.chat.id, "OBS: Como esse é apenas um protótipo é só aguardar alguns segundos para ser levado para a próxima fase!")
                     #parse_mode='MarkdownV2', reply_markup=markup.row(itembtn))
-    bot.register_next_step_handler(msg, IDlink)
+    time.sleep(4)
+    IDlink(msg)
+    #bot.register_next_step_handler(msg, IDlink)
     # bot.send_message(msg.chat.id, r"""Entendi, clicando neste link você poderá acessar a página de cadastro e assim poderá aproveitar as promoções do Ame +. 
     #         \n [Cadastro](https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F)""", parse_mode='MarkdownV2')
     #https://cliente.americanas.com.br/simple-login/cadastro/pf?next=https%3A%2F%2Fwww.americanas.com.br%2F
@@ -96,7 +101,10 @@ def branchHandler1(msg):
 
 def getInfo(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
-                            reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios", "Cashback acumulado", "Meus cupons"]))
+                            reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios",  "Meus cupons"], resize=(0.8, 0.5)))#"Cashback acumulado",
+
+
+
     bot.register_next_step_handler(message, branchHandler2)
 
 @bot.message_handler(commands=['help'])
@@ -111,7 +119,7 @@ def branchHandler2(msg):
             "Saldo" : "saldo(msg)",
             "Beneficios adquiridos" : "beneficios(msg)",
             "Desafios" : "desafios(msg)",
-            "Cashback acumulado" : "cashback(msg)",
+           # "Cashback acumulado" : "cashback(msg)",
             "Meus cupons" : "cupons(msg)"
             }
     
@@ -148,13 +156,14 @@ def cupons(msg):
                             "Cupons")
 
 def fim(msg):
-    message = bot.send_message(msg.chat.id,
+    msg = bot.send_message(msg.chat.id,
                                "Atendimento finalizado lalalala")
 
 
 @bot.message_handler(func=lambda message: True)
-def echo_all(message):
+def echo_all(msg):
     bot.reply_to(message, "Por favor, selecione uma das alternativas exibidas")
+    intro(msg)
 
 
 # bot.reply_to(message, message.text)
