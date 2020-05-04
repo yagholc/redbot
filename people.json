@@ -1,0 +1,22 @@
+{
+    "Accounts": [
+        {
+            "ContaAme": "Tainha",
+            "Nivel": "1"
+        },
+        {
+            "ContaAme": "BrunoLeaoT",
+            "Nivel": "0"
+        },
+        {
+            "ContaAme": "Calvin",
+            "Nivel": "2"
+        },
+        {
+            "id": 123,
+            "nivel": 1,
+            "beneficios": [],
+            "desafios": []
+        }
+    ]
+}
