@@ -2,7 +2,7 @@ from telebot import types
 import telebot
 import time
 import yaml
-
+import updateJason
 #from pydub import AudioSegment
 #import speech_recognition as sr
 with open(r"c\config.yml", "r") as ymlfile:
@@ -11,7 +11,7 @@ with open(r"c\config.yml", "r") as ymlfile:
 
 bot = telebot.TeleBot(cfg["token"]["red"])
 respostas = list()
-
+userID = 0
 
 def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as opções
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
@@ -43,9 +43,10 @@ def send_welcome(msg):
     # bot.reply_to(msg, "Clique no botão para iniciar seu processo de subscrição.")
     # markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     userID = msg.from_user.id #ID do usuario
-    #print(userID==881538100) 
+    #print(userID==881538100)
+    
     listIDs = [881538100]
-    if userID not in listIDs:
+    if userID in listIDs:
         #itembtn = types.KeyboardButton("Iniciar")
         # bot.send_message(msg.chat.id, "Clique no botão para iniciar uma nova experiência nas lojas Americanas.",
         #                 reply_markup=markup.row(itembtn))
@@ -94,6 +95,11 @@ def intro(msg):
 
 #intro para quem acabou de se cadastrar
 def intro2(msg):
+    # markup = types.ReplyKeyboardRemove(selective=False)
+    # tb.send_message(chat_id, message, reply_markup=markup)
+    # message=bot.send_message(msg.chat.id, "Choose one letter:", reply_markup=markup, one_time_keyboard=True)
+    userID = msg.from_user.id 
+    updateJason.setAccount(userID,msg.text)
     message = bot.send_message(msg.chat.id, "É ótimo te-l@ conosco, como posso ajudar?",
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
@@ -152,16 +158,27 @@ def altera_cadastro(msg):
     bot.register_next_step_handler(msg, intro3)
 
 def saldo(msg):
+    print(updateJason.consultData(msg.from_user.id,"nivel"))
+    data = updateJason.consultData(msg.from_user.id,"nivel")
+    bot.send_message(msg.chat.id, data)
     msg = bot.send_message(msg.chat.id,
                             "Saldo", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def beneficios(msg):
+    print(updateJason.consultData(msg.from_user.id,"beneficios"))
+    data = updateJason.consultData(msg.from_user.id,"beneficios")
+    for dado in data:
+        bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
                             "Beneficios", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def desafios(msg):
+    print(updateJason.consultData(msg.from_user.id,"desafios"))
+    data = updateJason.consultData(msg.from_user.id,"desafios")
+    for dado in data:
+        bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
                             "desafios", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
