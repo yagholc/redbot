@@ -35,7 +35,7 @@ def send_welcome(msg):
     # markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     userID = msg.from_user.id #ID do usuario
     #print(userID==881538100)
-    
+    print(updateJason.getAllIds())
     listIDs = [881538100]
     if userID in listIDs:
         #itembtn = types.KeyboardButton("Iniciar")
