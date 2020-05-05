@@ -152,7 +152,7 @@ def resumo(msg):
 
 def altera_cadastro(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Cadastro", reply_markup=setMarkup(["Voltar começo"]))
+                            "Coming soon!", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def saldo(msg):
@@ -160,7 +160,7 @@ def saldo(msg):
     data = updateJason.consultData(msg.from_user.id,"nivel")
     bot.send_message(msg.chat.id, data)
     msg = bot.send_message(msg.chat.id,
-                            "Saldo", reply_markup=setMarkup(["Voltar começo"]))
+                            "...", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def beneficios(msg):
@@ -178,7 +178,7 @@ def desafios(msg):
     for dado in data:
         bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
-                            "desafios", reply_markup=setMarkup(["Voltar começo"]))
+                            "...", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def cashback(msg):
