@@ -51,7 +51,7 @@ def send_welcome(msg):
         # itembtn = types.KeyboardButton("Ainda não tenho uma conta")
         # itembtn2 = types.KeyboardButton("Já tenho uma conta")
         bot.send_message(msg.chat.id, """Vejo que é a sua primeira vez conversando comigo, você já é um cliente Americanas cadastrado?.
-                                        \nCaso não seja, não se preocupe! Você está a poucos cliques de poder participar do Ame +""",
+                                        \nCaso não seja, não se preocupe! Você está a poucos cliques de poder participar dos nossos desafios""",
                         reply_markup=setMarkup(["Já tenho uma conta", "Ainda não tenho uma conta"]))
                         #reply_markup=markup.row([itembtn, itembtn2]))
         
@@ -85,7 +85,7 @@ def intro(msg):
     # markup = types.ReplyKeyboardRemove(selective=False)
     # tb.send_message(chat_id, message, reply_markup=markup)
     # message=bot.send_message(msg.chat.id, "Choose one letter:", reply_markup=markup, one_time_keyboard=True)
-    message = bot.send_message(msg.chat.id, "Olá, eu sou o assistente virtual do Ame +. Em que posso ajuda-l@?",
+    message = bot.send_message(msg.chat.id, "Olá, eu sou o assistente virtual Red. Em que posso ajuda-l@?",
                             reply_markup=setMarkup(["Consultar informações da conta", "Tenho uma dúvida"]))
     bot.register_next_step_handler(message, branchHandler1)
 
