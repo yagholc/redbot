@@ -146,7 +146,7 @@ def resumo(msg):
                             "Eu sou um assistente virtual e estou aqui para te guiar e fornecer informações por toda a sua jornada como cliente Americanas.", reply_markup=setMarkup(["Voltar começo"]))
 
     msg = bot.send_message(msg.chat.id,
-                            "#Nesse momento o que posso fazer é te apresentar relatórios dos beneficios e de seu andamento nos desafios.", reply_markup=setMarkup(["Voltar começo"]))
+                            "Nesse momento o que posso fazer é te apresentar relatórios dos beneficios e de seu andamento nos desafios.", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 
@@ -169,7 +169,7 @@ def beneficios(msg):
     for dado in data:
         bot.send_message(msg.chat.id, dado)
     msg = bot.send_message(msg.chat.id,
-                            "Beneficios", reply_markup=setMarkup(["Voltar começo"]))
+                            "...", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 def desafios(msg):
