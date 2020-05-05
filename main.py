@@ -6,7 +6,7 @@ import yaml
 import updateJason
 #from pydub import AudioSegment
 #import speech_recognition as sr
-with open(r"c\config.yml", "r") as ymlfile:
+with open("c/config.yml", "r") as ymlfile:
              cfg = yaml.load(ymlfile)
 
 
