@@ -16,13 +16,12 @@ def setMarkup(opt, resize=(0.8, 0.5)):  # opt é uma lista de strings com as op�
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=resize)
     cmd = ''
     if isinstance(opt, list):
-        if len(opt)==4:
+        if len(opt)==3:
             btn1 = types.KeyboardButton(opt[0])
             btn2 = types.KeyboardButton(opt[1])
             btn3 = types.KeyboardButton(opt[2])
-            btn4 = types.KeyboardButton(opt[3])
             markup.add(btn1, btn2)
-            markup.add(btn3, btn4)
+            markup.add(btn3)
             return(markup)
         else:
             itembtn = []
@@ -117,7 +116,7 @@ def branchHandler1(msg):
 
 def getInfo(msg):
     message = bot.send_message(msg.chat.id, "Selecione a opção desejada.",
-                            reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios",  "Meus cupons"], resize=(0.8, 0.5)))#"Cashback acumulado",
+                            reply_markup=setMarkup(["Saldo", "Beneficios adquiridos", "Desafios"], resize=(0.8, 0.5)))#"Cashback acumulado",
 
 
 
@@ -134,8 +133,7 @@ def branchHandler2(msg):
             "Alteração de cadastro": "altera_cadastro(msg)",
             "Saldo" : "saldo(msg)",
             "Beneficios adquiridos" : "beneficios(msg)",
-            "Desafios" : "desafios(msg)",
-            "Meus cupons" : "cupons(msg)"
+            "Desafios" : "desafios(msg)"
             }
                        # "Cashback acumulado" : "cashback(msg)",
     
@@ -145,7 +143,10 @@ def branchHandler2(msg):
         
 def resumo(msg):
     msg = bot.send_message(msg.chat.id,
-                            "Resumo", reply_markup=setMarkup(["Voltar começo"]))
+                            "Eu sou um assistente virtual e estou aqui para te guiar e fornecer informações por toda a sua jornada como cliente Americanas.", reply_markup=setMarkup(["Voltar começo"]))
+
+    msg = bot.send_message(msg.chat.id,
+                            "#Nesse momento o que posso fazer é te apresentar relatórios dos beneficios e de seu andamento nos desafios.", reply_markup=setMarkup(["Voltar começo"]))
     bot.register_next_step_handler(msg, intro3)
 
 
